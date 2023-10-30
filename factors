@@ -2,7 +2,10 @@
 import sys
 import math
 
+
 def factor(num: int):
+    if num < 2:
+        return (num, num)
     for p in range(2 if num % 2 == 0 else 3, int(math.sqrt(num)) + 1, 2):
         if num % p == 0:
             return (num // p, p)
