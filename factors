@@ -1,0 +1,25 @@
+#!/usr/bin/python3
+import sys
+import math
+
+def factor(num: int):
+    for p in range(2 if num % 2 == 0 else 3, int(math.sqrt(num)) + 1, 2):
+        if num % p == 0:
+            return (num // p, p)
+    return (num, 1)
+
+
+if __name__ == "__main__":
+    if (len(sys.argv) != 2):
+        print("Usage factors <file>", file=sys.stderr)
+        sys.exit(1)
+    try:
+        file = open(sys.argv[1], 'r')
+        for line in file:
+            num = int(line)
+            p, q = factor(num)
+            print(f"{num}={p}*{q}")
+
+        file.close()
+    except FileNotFoundError:
+        print(f"Error: Can't open file {sys.argv[1]}", file=sys.stderr)
